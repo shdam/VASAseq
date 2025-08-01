@@ -20,7 +20,7 @@ outprefix=$5
 #${p2star}/STAR --runThreadN 8 --genomeDir ${genome} --readFilesIn ${inputfq} --readFilesCommand zcat --outFilterMultimapNmax 20 --outSAMunmapped Within --outSAMtype BAM Unsorted SortedByCoordinate --quantMode TranscriptomeSAM --outSAMattributes All  --outFileNamePrefix ${outprefix}
 #${p2star}/STAR --runThreadN 8 --genomeDir ${genome} --readFilesIn ${inputfq} --readFilesCommand zcat --outFilterMultimapNmax 20 --outSAMunmapped Within --outSAMtype BAM Unsorted SortedByCoordinate --outSAMattributes All  --outFileNamePrefix ${outprefix}
 
-${p2star}/STAR --runThreadN 8 --genomeDir ${genome} --readFilesIn ${inputfq} --readFilesCommand zcat --outFilterMultimapNmax 20 --outSAMunmapped Within --outSAMtype BAM Unsorted --outSAMattributes All  --outFileNamePrefix ${outprefix}
+${p2star}/STAR --runThreadN 39 --genomeDir ${genome} --readFilesIn ${inputfq} --readFilesCommand zcat --outFilterMultimapNmax 20 --outSAMunmapped Within --outSAMtype BAM Unsorted --outSAMattributes All  --outFileNamePrefix ${outprefix}
 
 
 rm -r ${outprefix}_STARtmp

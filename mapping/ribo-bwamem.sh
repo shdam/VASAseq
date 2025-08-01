@@ -27,8 +27,10 @@ stranded=$6
 p2s=$7
 
 folder=${fq%/*}
-fq=${fq#*/}
-
+fq=${fq#*/*/}
+echo "here!!!!!!!"
+echo ${folder}/${fq} 
+echo ${folder}/aln_${fq%.f*q}.sai
 # mapping short reads
 ${p2bwa}/bwa aln ${ref} ${folder}/${fq} > ${folder}/aln_${fq%.f*q}.sai 
 ${p2bwa}/bwa samse ${ref} ${folder}/aln_${fq%.f*q}.sai ${folder}/${fq} | ${p2samtools}/samtools view -Sb > ${out}.aln-ribo.bam &
@@ -38,9 +40,9 @@ ${p2bwa}/bwa mem -t 8 -h 15 ${ref} ${folder}/${fq} | ${p2samtools}/samtools view
 
 wait
 
-${p2samtools}/samtools merge -n -r -h ${out}.aln-ribo.bam --threads 8 ${out}.all-ribo.bam ${out}.aln-ribo.bam ${out}.mem-ribo.bam 
+${p2samtools}/samtools merge -n -r -h ${out}.aln-ribo.bam --threads 39 ${out}.all-ribo.bam ${out}.aln-ribo.bam ${out}.mem-ribo.bam 
 rm ${out}.aln-ribo.bam ${out}.mem-ribo.bam ${folder}/aln_${fq%.f*q}.sai
-${p2samtools}/samtools sort -n --threads 8 ${out}.all-ribo.bam -O BAM -o ${out}.nsorted.all-ribo.bam
+${p2samtools}/samtools sort -n --threads 39 ${out}.all-ribo.bam -O BAM -o ${out}.nsorted.all-ribo.bam
 rm ${out}.all-ribo.bam
 
 ${p2s}/riboread-selection.py ${out}.nsorted.all-ribo.bam $stranded ${out}
